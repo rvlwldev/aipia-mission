@@ -1,0 +1,33 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:template;DB_CLOSE_DELAY=-1;DB_CLOSE_ON_EXIT=FALSE
+    driver-class-name: org.h2.Driver
+    username: sa
+    password:
+
+  jpa:
+    defer-datasource-initialization: true
+    open-in-view: false
+    hibernate:
+      ddl-auto: update
+    show_sql: true
+
+  security:
+    user:
+      name: root
+      password: 1234
+      roles:
+        - ADMIN
+
+logging:
+  level:
+    root: info
+    web: warn
+    sql: warn
+    com.template: warn
+  pattern:
+    console: "[%clr(%X{request_id:-startup}){cyan}] %d{yyyy-MM-dd HH:mm:ss.SSS} %clr(%5p){FATAL=red, ERROR=red, WARN=yellow, INFO=green, DEBUG=blue, TRACE=magenta} [%t] %clr(%-40.40logger{39}){cyan} [%4L] : %m%n"
+
+jwt:
+  secret: "316144de721f51b0ced65e2bfa764eaaa5cbd648ebc312a9452419168402c18e"
+  expiration-ms: 86400000

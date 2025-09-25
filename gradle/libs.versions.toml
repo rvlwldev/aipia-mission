@@ -1,0 +1,70 @@
+[versions]
+kotlin = "1.9.25"
+spring-boot = "3.5.5"
+jjwt = "0.12.5"
+
+[plugins]
+kotlin-jvm = { id = "org.jetbrains.kotlin.jvm", version.ref = "kotlin" }
+kotlin-jpa = { id = "org.jetbrains.kotlin.plugin.jpa", version.ref = "kotlin" }
+kotlin-spring = { id = "org.jetbrains.kotlin.plugin.spring", version.ref = "kotlin" }
+
+springboot = { id = "org.springframework.boot", version.ref = "spring-boot" }
+spring-dependency-management = { id = "io.spring.dependency-management", version = "1.1.7" }
+
+
+[libraries]
+# Kotlin
+dependency-kotlin-reflect = { module = "org.jetbrains.kotlin:kotlin-reflect" }
+dependency-kotlin-jackson = { module = "com.fasterxml.jackson.module:jackson-module-kotlin" }
+dependency-kotlin-coroutine = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-core" }
+
+# Springboot
+development-springboot-devtools = { module = "org.springframework.boot:spring-boot-devtools" }
+
+dependency-springboot-web = { module = "org.springframework.boot:spring-boot-starter-web" }
+dependency-springboot-validation = { module = "org.springframework.boot:spring-boot-starter-validation" }
+dependency-springboot-cache = { module = "org.springframework.boot:spring-boot-starter-cache" }
+dependency-springboot-websocket = { module = "org.springframework.boot:spring-boot-starter-websocket" }
+dependency-springboot-aop = { module = "org.springframework.boot:spring-boot-starter-aop" }
+dependency-springboot-jpa = { module = "org.springframework.boot:spring-boot-starter-data-jpa" }
+dependency-springboot-jdbc = { module = "org.springframework.boot:spring-boot-starter-data-jdbc" }
+dependency-springboot-actuator = { module = "org.springframework.boot:spring-boot-starter-actuator" }
+dependency-springboot-security = { module = "org.springframework.boot:spring-boot-starter-security" }
+dependency-springboot-oauth2-client = { module = "org.springframework.boot:spring-boot-starter-oauth2-client" }
+dependency-springboot-oauth2-resource = { module = "org.springframework.boot:spring-boot-starter-oauth2-resource-server" }
+dependency-springboot-redis = { module = "org.springframework.boot:spring-boot-starter-data-redis" }
+
+# Spring
+dependency-spring-aspects = { module = "org.springframework:spring-aspects" }
+dependency-spring-kafka = { module = "org.springframework.kafka:spring-kafka" }
+dependency-spring-retry = { module = "org.springframework.retry:spring-retry" }
+
+# Infrastructure
+runtimeonly-h2 = { module = "com.h2database:h2" }
+runtimeonly-mysql = { module = "com.mysql:mysql-connector-j" }
+runtimeonly-sqlite = { module = "org.xerial:sqlite-jdbc" }
+runtimeonly-prometheus = { module = "io.micrometer:micrometer-registry-prometheus" }
+runtimeonly-p6spy = { module = "p6spy:p6spy", version = "3.9.1" }
+
+# ETC
+dependency-redisson = { module = "org.redisson:redisson", version = "3.51.0" }
+dependency-swagger3 = { module = "org.springdoc:springdoc-openapi-starter-webmvc-ui", version = "2.8.9" }
+dependency-jjwt = { module = "io.jsonwebtoken:jjwt-api", version.ref = "jjwt" }
+dependency-jjwt-impl = { module = "io.jsonwebtoken:jjwt-impl", version.ref = "jjwt" }
+dependency-jjwt-jackson = { module = "io.jsonwebtoken:jjwt-jackson", version.ref = "jjwt" }
+
+# Test
+test-junit5 = { module = "org.jetbrains.kotlin:kotlin-test-junit5" }
+test-mockito = { module = "org.mockito.kotlin:mockito-kotlin", version = "5.4.0" }
+test-mockk = { module = "io.mockk:mockk", version = "1.14.5" }
+test-kotest-assertions = { module = "io.kotest:kotest-assertions-core-jvm", version = "5.9.0" }
+test-kotest-runner = { module = "io.kotest:kotest-runner-junit5-jvm", version = "5.9.0" }
+
+test-springboot = { module = "org.springframework.boot:spring-boot-starter-test" }
+test-springboot-security = { module = "org.springframework.security:spring-security-test" }
+test-testcontainers = { module = "org.testcontainers:testcontainers" }
+
+[bundles]
+kotlin = ["dependency-kotlin-reflect", "dependency-kotlin-jackson", "dependency-kotlin-coroutine"]
+test-kotest = ["test-kotest-assertions", "test-kotest-runner"]
+jjwt = ["dependency-jjwt", "dependency-jjwt-impl", "dependency-jjwt-jackson"]
