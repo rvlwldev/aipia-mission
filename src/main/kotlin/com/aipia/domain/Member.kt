@@ -15,7 +15,7 @@ open class Member(
     encryptedPassword: String,
     nickname: String,
     role: String = "ROLE_USER",
-    point: Long = 1_000_000L
+    point: Int = 1_000_000
 ) {
 
     @Column(nullable = false)
@@ -31,9 +31,14 @@ open class Member(
         protected set
 
     @Column(nullable = false)
-    var point: Long = point
+    var point: Int = point
         protected set
 
     @CreatedDate
     val createdAt: LocalDateTime = LocalDateTime.now()
+
+    fun decreasePoint(amount: Int) {
+        check(this.point - amount >= 0) { "포인트가 부족합니다." }
+        this.point -= amount
+    }
 }

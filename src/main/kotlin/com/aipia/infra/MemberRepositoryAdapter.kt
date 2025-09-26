@@ -15,4 +15,7 @@ class MemberRepositoryAdapter(private val repo: MemberJpaRepository) : MemberRep
     override fun find(id: String) =
         repo.findByIdOrNull(id)
 
+    override fun findForUpdate(id: String): Member? =
+        repo.findByIdOrNullWithPessimisticLock(id)
+
 }

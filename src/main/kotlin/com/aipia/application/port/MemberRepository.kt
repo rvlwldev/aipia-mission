@@ -6,5 +6,6 @@ interface MemberRepository {
 
     fun save(member: Member): Member
     fun find(id: String): Member?
+    fun findForUpdate(id: String): Member?
 
 }

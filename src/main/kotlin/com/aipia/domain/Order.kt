@@ -26,11 +26,8 @@ open class Order(
     val member: Member,
 
     @OneToMany(mappedBy = "order", cascade = [ALL], fetch = EAGER, orphanRemoval = true)
-    private val _orderItems: MutableList<OrderItem> = mutableListOf()
+    val items: MutableList<OrderItem> = mutableListOf()
 ) {
-    val items: List<OrderItem>
-        get() = this._orderItems.toList()
-
     var totalPrice: Int = 0
         protected set
 
@@ -49,7 +46,7 @@ open class Order(
         protected set
 
     fun addAllItems(additionalOrderItems: List<OrderItem>) {
-        val map = this._orderItems.associateBy { it.product.id }
+        val map = this.items.associateBy { it.product.id }
             .toMutableMap()
 
         additionalOrderItems.forEach { orderItem ->
@@ -60,9 +57,18 @@ open class Order(
                 map[orderItem.product.id] = orderItem
         }
 
-        this._orderItems.clear()
-        this._orderItems.addAll(map.values)
-        this.totalPrice = this._orderItems.sumOf { it.product.price * it.capacity }
+        this.items.clear()
+        this.items.addAll(map.values)
+        this.totalPrice = this.items.sumOf { it.product.price * it.capacity }
+    }
+
+    fun markPaid() {
+        this.status = OrderStatus.PAID
+    }
+
+    fun markFailed(reason: String?) {
+        this.status = OrderStatus.FAILED
+        this.reason = reason
     }
 
     companion object {

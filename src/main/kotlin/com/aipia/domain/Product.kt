@@ -13,11 +13,20 @@ open class Product(
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,
     name: String,
-    price: Int
+    price: Int,
+    capacity: Int
 ) {
     var name: String = name
         protected set
 
     var price: Int = price
         protected set
+
+    var capacity: Int = capacity
+        protected set
+
+    fun decreaseCapacity(amount: Int) {
+        check(this.capacity - amount >= 0) { "재고가 부족합니다." }
+        this.capacity -= amount
+    }
 }
