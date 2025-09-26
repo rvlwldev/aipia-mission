@@ -1,6 +1,6 @@
 package com.aipia._config.security
 
-import com.aipia.application.port.MemberRepository
+import com.aipia.application.member.port.MemberRepository
 import org.springframework.security.core.authority.SimpleGrantedAuthority
 import org.springframework.security.core.userdetails.User
 import org.springframework.security.core.userdetails.UserDetails

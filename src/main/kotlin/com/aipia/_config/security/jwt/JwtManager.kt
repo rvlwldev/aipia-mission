@@ -1,6 +1,6 @@
 package com.aipia._config.security.jwt
 
-import com.aipia.domain.Member
+import com.aipia.application.member.Member
 import io.jsonwebtoken.Claims
 import io.jsonwebtoken.ExpiredJwtException
 import io.jsonwebtoken.Jws

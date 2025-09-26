@@ -2,7 +2,7 @@ package com.aipia.api.rest.order
 
 import com.aipia.api.rest.order.request.OrderProductRequest
 import com.aipia.api.rest.order.response.OrderResponse
-import com.aipia.application.service.OrderService
+import com.aipia.application.order.OrderService
 import org.springframework.http.HttpStatus
 import org.springframework.security.core.annotation.AuthenticationPrincipal
 import org.springframework.security.core.userdetails.User

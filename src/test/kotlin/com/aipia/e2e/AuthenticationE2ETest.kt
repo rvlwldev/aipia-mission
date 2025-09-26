@@ -2,8 +2,8 @@ package com.aipia.e2e
 
 import com.aipia.api.rest.auth.request.LoginRequest
 import com.aipia.api.rest.auth.request.SignupRequest
-import com.aipia.domain.Member
-import com.aipia.infra.repository.MemberJpaRepository
+import com.aipia.application.member.Member
+import com.aipia.infra.member.MemberJpaRepository
 import com.fasterxml.jackson.databind.ObjectMapper
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNotNull

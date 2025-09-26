@@ -3,8 +3,7 @@ package com.aipia.api.rest.auth
 import com.aipia.api.rest.auth.request.LoginRequest
 import com.aipia.api.rest.auth.request.SignupRequest
 import com.aipia.api.rest.auth.response.LoginResponse
-import com.aipia.application.service.AuthenticationService
-import com.aipia.application.service.MemberService
+import com.aipia.application.member.MemberService
 import jakarta.validation.Valid
 import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.PostMapping
@@ -15,10 +14,7 @@ import org.springframework.web.bind.annotation.RestController
 
 @RestController
 @RequestMapping("/api/auth")
-class AuthenticationController(
-    private val authService: AuthenticationService,
-    private val memberService: MemberService
-) {
+class AuthenticationController(private val memberService: MemberService) {
 
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
@@ -28,7 +24,7 @@ class AuthenticationController(
 
     @PostMapping("/login")
     fun postLogin(@RequestBody @Valid body: LoginRequest): LoginResponse {
-        val token = with(body) { authService.login(body.id, body.password) }
+        val token = with(body) { memberService.login(body.id, body.password) }
         return LoginResponse(token)
     }
 
