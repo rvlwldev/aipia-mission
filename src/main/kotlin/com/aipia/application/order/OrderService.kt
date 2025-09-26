@@ -3,7 +3,9 @@ package com.aipia.application.order
 import com.aipia.application.member.exception.MemberNotFoundException
 import com.aipia.application.member.port.MemberRepository
 import com.aipia.application.order.event.OrderCreatedEvent
-import com.aipia.application.product.ProductRepository
+import com.aipia.application.order.port.OrderEventPublisher
+import com.aipia.application.order.port.OrderRepository
+import com.aipia.application.product.port.ProductRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

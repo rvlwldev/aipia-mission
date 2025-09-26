@@ -3,10 +3,11 @@ package com.aipia.application.payment
 import com.aipia._common.exception.BusinessException
 import com.aipia.application.member.exception.MemberNotFoundException
 import com.aipia.application.member.port.MemberRepository
-import com.aipia.application.order.OrderRepository
+import com.aipia.application.order.port.OrderRepository
 import com.aipia.application.order.exception.OrderNotFoundException
+import com.aipia.application.payment.port.PaymentRepository
 import com.aipia.application.product.ProductNotFoundException
-import com.aipia.application.product.ProductRepository
+import com.aipia.application.product.port.ProductRepository
 import org.springframework.stereotype.Service
 import org.springframework.transaction.annotation.Transactional
 

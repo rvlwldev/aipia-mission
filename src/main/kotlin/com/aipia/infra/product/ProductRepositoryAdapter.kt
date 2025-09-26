@@ -1,7 +1,7 @@
 package com.aipia.infra.product
 
 import com.aipia.application.product.Product
-import com.aipia.application.product.ProductRepository
+import com.aipia.application.product.port.ProductRepository
 import org.springframework.stereotype.Component
 
 @Component

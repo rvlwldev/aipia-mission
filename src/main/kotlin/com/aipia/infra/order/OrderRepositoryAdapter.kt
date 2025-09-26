@@ -1,7 +1,7 @@
 package com.aipia.infra.order
 
 import com.aipia.application.order.Order
-import com.aipia.application.order.OrderRepository
+import com.aipia.application.order.port.OrderRepository
 import org.springframework.data.repository.findByIdOrNull
 import org.springframework.stereotype.Component
 

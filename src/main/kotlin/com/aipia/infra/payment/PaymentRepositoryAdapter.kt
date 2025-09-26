@@ -1,7 +1,7 @@
 package com.aipia.infra.payment
 
 import com.aipia.application.payment.Payment
-import com.aipia.application.payment.PaymentRepository
+import com.aipia.application.payment.port.PaymentRepository
 import com.aipia.application.payment.PaymentStatus
 import com.aipia.infra.member.MemberJpaRepository
 import com.aipia.infra.order.OrderJpaRepository

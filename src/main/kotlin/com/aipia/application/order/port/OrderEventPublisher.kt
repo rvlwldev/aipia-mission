@@ -1,4 +1,4 @@
-package com.aipia.application.order
+package com.aipia.application.order.port
 
 import com.aipia.application.order.event.OrderCreatedEvent
 
