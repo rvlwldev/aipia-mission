@@ -4,6 +4,7 @@ import jakarta.persistence.CascadeType.ALL
 import jakarta.persistence.Entity
 import jakarta.persistence.EnumType.STRING
 import jakarta.persistence.Enumerated
+import jakarta.persistence.FetchType.EAGER
 import jakarta.persistence.GeneratedValue
 import jakarta.persistence.GenerationType.IDENTITY
 import jakarta.persistence.Id
@@ -24,7 +25,7 @@ open class Order(
     @JoinColumn(name = "member_id", nullable = false)
     val member: Member,
 
-    @OneToMany(mappedBy = "order", cascade = [ALL], orphanRemoval = true)
+    @OneToMany(mappedBy = "order", cascade = [ALL], fetch = EAGER, orphanRemoval = true)
     private val _orderItems: MutableList<OrderItem> = mutableListOf()
 ) {
     val items: List<OrderItem>
@@ -66,9 +67,14 @@ open class Order(
 
     companion object {
         fun create(member: Member, products: Map<Product, Int>): Order {
-            check(products.values.any { it < 1 }) {
-                throw IllegalArgumentException("1개 이상 주문가능합니다.")
-            }
+            /**
+             * NOTE
+             * 현재는 RestAPI 만 사용하며 DTO 레벨에서 입력값을 검증함으로 주석 처리합니다.
+             * 추후 주문이 생성되는 진입점이 많아지면 검증 로직의 응집을 고려할 수 있습니다.
+             * */
+//            check(products.values.any { it > 0 }) {
+//                throw IllegalArgumentException("1개 이상 주문가능합니다.")
+//            }
 
             val order = Order(member = member)
             val items = products.map { (product, capacity) ->
