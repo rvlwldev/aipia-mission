@@ -20,7 +20,7 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(name = "orders")
-open class Order(
+class Order(
     @Id
     @GeneratedValue(strategy = IDENTITY)
     val id: Long = 0,

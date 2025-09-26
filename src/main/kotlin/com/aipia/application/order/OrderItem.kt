@@ -12,7 +12,7 @@ import jakarta.persistence.Table
 
 @Entity
 @Table(name = "order_items")
-open class OrderItem(
+class OrderItem(
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     val id: Long = 0,

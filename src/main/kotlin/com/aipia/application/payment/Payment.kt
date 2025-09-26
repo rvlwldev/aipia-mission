@@ -24,7 +24,7 @@ import java.time.LocalDateTime
     uniqueConstraints = [UniqueConstraint(name = "UNI_MEMBER_ORDER", columnNames = ["member_id", "order_id"])],
     indexes = [Index(name = "IDX_MEMBER_STATUS", columnList = "member_id, status")]
 )
-open class Payment(
+class Payment(
     @Id @GeneratedValue(strategy = IDENTITY)
     val id: Long = 0,
 

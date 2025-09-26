@@ -9,7 +9,7 @@ import java.time.LocalDateTime
 
 @Entity
 @Table(name = "members")
-open class Member(
+class Member(
     @Id val id: String = "",
     encryptedPassword: String,
     nickname: String,
