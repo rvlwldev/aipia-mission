@@ -8,8 +8,8 @@ data class SignupRequest(
         regexp = "^[a-zA-Z0-9]+$",
         message = "아이디는 영어, 숫자만 사용할 수 있습니다."
     )
-    @field:Size(min = 4, max = 30, message = "로그인 아이디는 최소 4글자 이상, 30글자 이하입니다.")
-    val name: String,
+    @field:Size(min = 4, max = 30, message = "아이디는 최소 4글자 이상, 30글자 이하입니다.")
+    val id: String,
 
     @field:Pattern(
         regexp = "^(?=.{4,50}$)(?=.*[!@#$%^&*(),.?\":{}|<>\\-])[A-Za-z\\d!@#$%^&*(),.?\":{}|<>\\-]+$",

@@ -25,25 +25,25 @@ import kotlin.test.assertNotEquals
 @AutoConfigureMockMvc
 @TestConstructor(autowireMode = TestConstructor.AutowireMode.ALL)
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
-class AuthE2ETest(
+class AuthenticationE2ETest(
     private val mvc: MockMvc,
     private val repository: MemberJpaRepository,
     private val passwordEncoder: PasswordEncoder,
     private val objectMapper: ObjectMapper,
 ) {
 
-    val testName = "test"
+    val testId = "test"
     val testPassword = "test-password1!@"
     val testNickname = "test"
 
-    val existMemberName = "exist"
+    val existMemberId = "exist"
     val existMemberPassword = "exist-password!@"
     val existMemberNickname = "exist"
 
     @BeforeAll
     fun setup() {
         val exist = Member(
-            name = existMemberName,
+            id = existMemberId,
             encryptedPassword = passwordEncoder.encode(existMemberPassword),
             nickname = existMemberNickname
         )
@@ -53,7 +53,7 @@ class AuthE2ETest(
 
     @Test
     fun `성공 - 회원가입`() {
-        val request = SignupRequest(testName, testPassword, testNickname)
+        val request = SignupRequest(testId, testPassword, testNickname)
 
         mvc.post("/api/auth/signup") {
             contentType = MediaType.APPLICATION_JSON
@@ -62,9 +62,9 @@ class AuthE2ETest(
             status { isCreated() }
         }
 
-        val member = repository.findByName(request.name)
+        val member = repository.findById(request.id).orElse(null)
         assertNotNull(member!!)
-        assertEquals(request.name, member.name)
+        assertEquals(request.id, member.id)
         assertEquals(request.nickname, member.nickname)
         assertNotEquals(request.password, member.password)
         assertTrue(passwordEncoder.matches(request.password, member.password))
@@ -72,7 +72,7 @@ class AuthE2ETest(
 
     @Test
     fun `성공 - 로그인`() {
-        val request = LoginRequest(existMemberName, existMemberPassword)
+        val request = LoginRequest(existMemberId, existMemberPassword)
 
         mvc.post("/api/auth/login") {
             contentType = MediaType.APPLICATION_JSON
@@ -85,7 +85,7 @@ class AuthE2ETest(
 
     @Test
     fun `실패 - 회원가입시 아이디 중복`() {
-        val request = SignupRequest(existMemberName, testPassword, testNickname)
+        val request = SignupRequest(existMemberId, testPassword, testNickname)
 
         mvc.post("/api/auth/signup") {
             contentType = MediaType.APPLICATION_JSON

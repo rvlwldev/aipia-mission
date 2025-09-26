@@ -27,7 +27,7 @@ class JwtManager(private val properties: JwtProperties) {
         val now = Date()
 
         return Jwts.builder()
-            .subject(member.name) // username
+            .subject(member.id) // username
             .claim("role", member.role) // authority
             .issuedAt(now)
             .expiration(Date(now.time + properties.expirationMs))

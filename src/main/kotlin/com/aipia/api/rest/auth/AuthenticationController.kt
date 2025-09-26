@@ -23,12 +23,12 @@ class AuthenticationController(
     @PostMapping("/signup")
     @ResponseStatus(HttpStatus.CREATED)
     fun postSignup(@RequestBody @Valid body: SignupRequest) {
-        with(body) { memberService.createMember(name, password, nickname) }
+        with(body) { memberService.createMember(id, password, nickname) }
     }
 
     @PostMapping("/login")
     fun postLogin(@RequestBody @Valid body: LoginRequest): LoginResponse {
-        val token = with(body) { authService.login(body.name, body.password) }
+        val token = with(body) { authService.login(body.id, body.password) }
         return LoginResponse(token)
     }
 

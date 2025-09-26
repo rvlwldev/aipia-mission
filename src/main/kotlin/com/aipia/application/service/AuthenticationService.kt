@@ -16,8 +16,8 @@ class AuthenticationService(
 ) {
 
     @Transactional
-    fun login(name: String, password: String): String {
-        val member = repository.findByName(name)
+    fun login(id: String, password: String): String {
+        val member = repository.find(id)
             ?: throw MemberNotFoundException()
 
         if (!passwordManager.isValid(password, member.password)) {

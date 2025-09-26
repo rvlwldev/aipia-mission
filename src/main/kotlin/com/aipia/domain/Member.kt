@@ -2,8 +2,6 @@ package com.aipia.domain
 
 import jakarta.persistence.Column
 import jakarta.persistence.Entity
-import jakarta.persistence.GeneratedValue
-import jakarta.persistence.GenerationType
 import jakarta.persistence.Id
 import jakarta.persistence.Table
 import org.springframework.data.annotation.CreatedDate
@@ -13,19 +11,11 @@ import java.time.LocalDateTime
 @Table(name = "members")
 open class Member(
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    val id: Long = 0,
-
-    @Column(name = "member_name", unique = true, nullable = false)
-    val name: String,
-
+    val id: String = "",
     encryptedPassword: String,
     nickname: String,
     role: String = "ROLE_USER",
-    point: Long = 1_000_000L,
-
-    @CreatedDate
-    val createdAt: LocalDateTime = LocalDateTime.now(),
+    point: Long = 1_000_000L
 ) {
 
     @Column(nullable = false)
@@ -44,4 +34,6 @@ open class Member(
     var point: Long = point
         protected set
 
+    @CreatedDate
+    val createdAt: LocalDateTime = LocalDateTime.now()
 }
