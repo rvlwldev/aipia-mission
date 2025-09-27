@@ -1,5 +1,6 @@
 package com.aipia.api.rest.order
 
+import jakarta.validation.Valid
 import com.aipia.api.rest.order.request.OrderProductRequest
 import com.aipia.api.rest.order.response.OrderResponse
 import com.aipia.application.order.OrderService
@@ -18,7 +19,7 @@ class OrderController(private val service: OrderService) {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    fun post(@AuthenticationPrincipal user: User, @RequestBody body: List<OrderProductRequest>): OrderResponse {
+    fun post(@AuthenticationPrincipal user: User, @Valid @RequestBody body: List<OrderProductRequest>): OrderResponse {
         val items = body
             .groupBy { it.productId }
             .mapValues { (_, capacities) ->

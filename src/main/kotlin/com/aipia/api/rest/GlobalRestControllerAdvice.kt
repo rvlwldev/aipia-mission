@@ -10,6 +10,7 @@ import org.springframework.web.bind.MethodArgumentNotValidException
 import org.springframework.web.bind.annotation.ExceptionHandler
 import org.springframework.web.bind.annotation.ResponseStatus
 import org.springframework.web.bind.annotation.RestControllerAdvice
+import org.springframework.web.method.annotation.HandlerMethodValidationException
 
 @RestControllerAdvice
 class GlobalRestControllerAdvice {
@@ -53,15 +54,29 @@ class GlobalRestControllerAdvice {
     }
 
     // DTO 검사 에러
-    @ExceptionHandler(MethodArgumentNotValidException::class)
+    @ExceptionHandler(value = [MethodArgumentNotValidException::class, HandlerMethodValidationException::class])
     fun handleMethodArgumentNotValidException(
-        exception: MethodArgumentNotValidException,
+        exception: Exception,
         request: HttpServletRequest
     ): ResponseEntity<BusinessExceptionResponse?> {
         val status = HttpStatus.BAD_REQUEST
-        val message: String = exception.message
-        val errors = exception.bindingResult.fieldErrors
-            .map { error -> "${error.field}:${error.defaultMessage}" }
+        val message: String = when (exception) {
+            is MethodArgumentNotValidException -> exception.message
+            is HandlerMethodValidationException -> exception.message
+            else -> "잘못된 요청입니다."
+        }
+        val errors = when (exception) {
+            is MethodArgumentNotValidException -> exception.bindingResult.fieldErrors
+                .map { error -> "${error.field}:${error.defaultMessage}" }
+
+            is HandlerMethodValidationException -> exception.allErrors
+                .map { error ->
+                    val paramName = error.codes?.firstOrNull() ?: "unknown"
+                    "$paramName:${error.defaultMessage ?: ""}"
+                }
+
+            else -> emptyList()
+        }
 
         val response = BusinessExceptionResponse(
             status = status.value(),
